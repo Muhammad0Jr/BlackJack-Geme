@@ -1,0 +1,40 @@
+body {
+    background-image: url("media/flat-design-poker-table-background_23-2151047002.jpg");
+    background-size: cover;
+    text-align: center;
+    font-size: xx-large;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1 {
+    color: goldenrod;
+}
+
+#message-el {
+    font-style: italic;
+}
+
+#start-btn {
+    color: #016f32;
+    height: 40px;
+    width: 150px;
+    background: goldenrod;
+    border: none;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bold;
+    margin: 10px;
+}
+
+#new-btn {
+    color: #016f32;
+    height: 40px;
+    width: 150px;
+    background: goldenrod;
+    border: none;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bold;
+    margin: 10px;
+}
