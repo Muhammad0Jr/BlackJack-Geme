@@ -38,3 +38,15 @@ h1 {
     font-weight: bold;
     margin: 10px;
 }
+
+#new-game {
+    color: #016f32;
+    height: 60px;
+    width: 250px;
+    background: goldenrod;
+    border: none;
+    border-radius: 5px;
+    font-size: larger;
+    font-weight: bold;
+    margin: 10px;
+}

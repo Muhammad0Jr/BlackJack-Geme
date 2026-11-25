@@ -1,62 +1,84 @@
-let firstCard = Math.floor(Math.random() *(11-2+1))+2;
-let secondCard = Math.floor(Math.random() * (11-2+1))+2;
-let thirdCard = Math.floor(Math.random() * (11-2+1))+2;
-let sum = firstCard + secondCard
+function getRandom() {
+    let random = Math.floor(Math.random()*13)+1;
+    if (random === 1) {
+        return 11
+    }   else if (random > 10) {
+        return 10
+    }   else {
+        return random
+    }
+}
+
+
+let player = {
+    name: "John Doe",
+    chips: 195
+}
+let card = []
+let sum = 0
 let hasBlackJack = false
-let isAlive = true
+let isAlive = false
 let message = ""
 
 let messageEL = document.getElementById("message-el")
 let sumC = document.getElementById("sum")
 let cards = document.getElementById("cards")
+let playerEl = document.getElementById("player-el")
+
+playerEl.textContent = player.name + ": $" + player.chips
 
 function startGame() {
+    if (player.chips >= 13) {
+    hasBlackJack = false
+    isAlive = true
+    let firstCard = getRandom() 
+    let secondCard = getRandom()
+    card = [firstCard, secondCard]
+    sum = firstCard + secondCard
     renderGame()
-    
+    } else {
+    messageEL.textContent ="Not enough chips to start a round!"
+    }
 }
 
 function renderGame() {
-
-    firstCard = Math.floor(Math.random() *(11-2+1))+2;
-    secondCard = Math.floor(Math.random() * (11-2+1))+2;
-    sum = firstCard + secondCard
     sumC.textContent = "Sum: " + sum
-    cards.textContent = "Cards: " + firstCard + " & " + secondCard
+    cards.textContent = "Cards: " + card.join(" & ")
     if (sum <= 20) {
     message = "Do you want to draw a new card?"
+    isAlive = true
     } else if (sum === 21) {
     message = "WoHoo! you have won a BlackJack!"
+    player.chips = player.chips + 39
     hasBlackJack = true
+    isAlive = false
     } else {
     message = "You're out of the game!"
     isAlive = false
+    player.chips = player.chips - 13
     }
     messageEL.textContent = message
-    isAlive = true
-    hasBlackJack = false
+    playerEl.textContent = player.name + ": $" + player.chips
+
 }
 
 function newCard() { 
-    if (isAlive) {
-    thirdCard = Math.floor(Math.random() * (11-2+1))+2;
-    sum = sum + thirdCard
-    cards.textContent +=  " & " + thirdCard
-    sumC.textContent = "Sum: " + sum
-    } else if (hasBlackJack) {
-    cards.textContent +=  " & " + thirdCard
-    sumC.textContent = "Sum: " + sum
-    messageEL.textContent = message
-    }
-
-    if (sum <= 20) {
-    message = "Do you want to draw a new card?"
-    } else if (sum === 21) {
-    message = "WoHoo! you have won a BlackJack!"
-    hasBlackJack = true
-    } else {
-    message = "You're out of the game!"
-    isAlive = false
-    }
-    messageEL.textContent = message
+    if (isAlive && !hasBlackJack && player.chips >= 13) {
+    let drawnCard = getRandom()
+    card.push(drawnCard)
+    sum = sum + drawnCard
+    renderGame()}
 }
 
+function newGame() {
+    card = []
+    sum = 0
+    player.chips = 195
+    isAlive = false
+    hasBlackJack = false
+
+    messageEL.textContent = "Want to play a round?"
+    cards.textContent = "Cards: "
+    sumC.textContent = "Sum: "
+    playerEl.textContent = player.name + ": $" + player.chips
+}
